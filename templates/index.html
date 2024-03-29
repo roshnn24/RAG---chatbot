@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Summarization Model</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('https://images.unsplash.com/photo-1606778303077-3780ea8d5420?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3M3wwfDF8c2VhcmNofDIwfHxuZXVyYWwlMjBuZXR3b3JrfGVufDB8fHx8MTY1OTA5MjU2NA&ixlib=rb-1.2.1&q=80&w=2000content/images/size/w1200');
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Adjust background opacity */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #0066ff;
+        }
+
+        h2 {
+            color: #009933;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-group input[type="file"] {
+            display: block;
+            margin-top: 5px;
+        }
+
+        .button {
+            background-color: #009933;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #007a29;
+        }
+
+        .response {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .bot-image {
+            float: left;
+            margin-right: 10px;
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Code Summarization Model</h1>
+
+        {% if error %}
+        <p style="color: red;">{{ error }}</p>
+        {% endif %}
+
+        {% if success %}
+        <p style="color: green;">{{ success }}</p>
+        {% endif %}
+
+        <form class="form-group" action="/upload" method="POST" enctype="multipart/form-data">
+            <label for="file">Upload PDF file:</label><br>
+            <input type="file" id="file" name="file"><br><br>
+            <input class="button" type="submit" value="Upload">
+        </form>
+
+        <hr>
+
+        <form class="form-group" action="/get_response" method="POST">
+            <input type="hidden" name="action" value="summarize_code">
+            <button class="button" type="submit">Summarize Code</button>
+        </form>
+
+        {% if response %}
+        <div class="response">
+            <h2>Model's Response:</h2>
+            <img class="bot-image" src="https://media.istockphoto.com/id/1221348467/vector/chat-bot-ai-and-customer-service-support-concept-vector-flat-person-illustration-smiling.jpg?s=612x612&w=0&k=20&c=emMSOYb4jWIVQQBVpYvP9LzGwPXXhcmbpZHlE6wgR78=" alt="Bot Image">
+            <p>{{ response }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
